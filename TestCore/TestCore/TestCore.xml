@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestCore</name>
+    </assembly>
+    <members>
+        <member name="M:TestCore.Controllers.TestController.GetZhangsan">
+            <summary>
+            问张三多大
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TestCore.Controllers.TestController.GetZhangsanByLiqi">
+            <summary>
+            获取张三多大
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TestCore.Services.Liqi">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TestCore.Services.Liqi.Say">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TestCore.Services.Lisi">
+            <summary>
+            李四
+            </summary>
+        </member>
+        <member name="M:TestCore.Services.Lisi.Say">
+            <summary>
+            李四说
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TestCore.Services.Wanger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TestCore.Services.Wanger.Say">
+            <summary>
+            说
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TestCore.Services.Wangwu">
+            <summary>
+            王五
+            </summary>
+        </member>
+        <member name="M:TestCore.Services.Wangwu.Say">
+            <summary>
+            说
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

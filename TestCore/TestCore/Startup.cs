@@ -7,8 +7,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
+using TestCore.Services;
 
 namespace TestCore
 {
@@ -24,7 +28,22 @@ namespace TestCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(u =>
+            {
+                u.ReturnHttpNotAcceptable = false;
+                
+            }).AddXmlDataContractSerializerFormatters();
+
+            services.AddSwaggerGen(u =>
+            {
+                u.SwaggerDoc("v1",new OpenApiInfo{Title = "Test API",Version = "v1"});
+                //获取xml文件名
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //获取xml文件路径
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //添加控制器层注释，true表示显示器控制器注释
+                u.IncludeXmlComments(xmlPath,true);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +54,10 @@ namespace TestCore
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(u => { u.SwaggerEndpoint("/swagger/v1/swagger.json","Test API v1");});
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -43,6 +66,7 @@ namespace TestCore
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
