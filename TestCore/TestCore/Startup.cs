@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using TestCore.Services;
+using TestCore.Services.IServices;
 
 namespace TestCore
 {
@@ -33,6 +34,9 @@ namespace TestCore
                 u.ReturnHttpNotAcceptable = false;
                 
             }).AddXmlDataContractSerializerFormatters();
+
+            services.Configure<DemoOptions>(Configuration.GetSection("Demo"));
+            services.AddSingleton<IDemoService, DemoService>();
 
             services.AddSwaggerGen(u =>
             {
@@ -68,5 +72,6 @@ namespace TestCore
             });
 
         }
+
     }
 }
