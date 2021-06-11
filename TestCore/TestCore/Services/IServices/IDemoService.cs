@@ -11,5 +11,9 @@ namespace TestCore.Services.IServices
         /// 
         /// </summary>
         void GetDemoConfig();
+
+        void GetDemoConfigBySnapshot();
+
+        void GetConfigByMonitor();
     }
 }

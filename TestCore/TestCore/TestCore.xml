@@ -4,6 +4,26 @@
         <name>TestCore</name>
     </assembly>
     <members>
+        <member name="T:TestCore.Controllers.TestController">
+            <summary>
+            测试
+            </summary>
+        </member>
+        <member name="M:TestCore.Controllers.TestController.GetConfig(TestCore.Services.IServices.IDemoService)">
+            <summary>
+            获取选项配置
+            </summary>
+        </member>
+        <member name="M:TestCore.Controllers.TestController.GetConfigBySnapshot(TestCore.Services.IServices.IDemoService)">
+            <summary>
+            获取选项配置
+            </summary>
+        </member>
+        <member name="M:TestCore.Controllers.TestController.GetConfigByMonitor(TestCore.Services.IServices.IDemoService)">
+            <summary>
+            获取选项配置
+            </summary>
+        </member>
         <member name="T:TestCore.DemoOptions">
             <summary>
             
@@ -14,7 +34,7 @@
             
             </summary>
         </member>
-        <member name="M:TestCore.Services.DemoService.#ctor(Microsoft.Extensions.Options.IOptions{TestCore.DemoOptions})">
+        <member name="M:TestCore.Services.DemoService.#ctor(Microsoft.Extensions.Options.IOptions{TestCore.DemoOptions},Microsoft.Extensions.Options.IOptionsSnapshot{TestCore.DemoOptions},Microsoft.Extensions.Options.IOptionsMonitor{TestCore.DemoOptions})">
             <summary>
             
             </summary>

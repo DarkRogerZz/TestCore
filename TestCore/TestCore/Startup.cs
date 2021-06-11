@@ -11,7 +11,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Primitives;
 using Microsoft.OpenApi.Models;
+using TestCore.Extension;
 using TestCore.Services;
 using TestCore.Services.IServices;
 
@@ -29,14 +31,17 @@ namespace TestCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ChangeToken.OnChange(()=>Configuration.GetReloadToken(), () =>
+            {
+                Console.WriteLine("÷ÿ–¬º”‘ÿ≈‰÷√°£");
+            });
+            services.AddDemoService(Configuration.GetSection("Demo"));
+            services.AddOptions<DemoOptions>().Bind(Configuration.GetSection(DemoOptions.MyConfig)).ValidateDataAnnotations();
             services.AddControllers(u =>
             {
                 u.ReturnHttpNotAcceptable = false;
                 
             }).AddXmlDataContractSerializerFormatters();
-
-            services.Configure<DemoOptions>(Configuration.GetSection("Demo"));
-            services.AddSingleton<IDemoService, DemoService>();
 
             services.AddSwaggerGen(u =>
             {
@@ -49,7 +54,7 @@ namespace TestCore
                 u.IncludeXmlComments(xmlPath,true);
             });
         }
-
+    
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -58,9 +63,6 @@ namespace TestCore
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(u => { u.SwaggerEndpoint("/swagger/v1/swagger.json","Test API v1");});
 
             app.UseRouting();
 
@@ -71,6 +73,9 @@ namespace TestCore
                 endpoints.MapControllers();
             });
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(u => { u.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API v1"); });
         }
 
     }
