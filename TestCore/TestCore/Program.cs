@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using NLog.Web;
 
 namespace TestCore
 {
@@ -38,9 +39,14 @@ namespace TestCore
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging((context, ILoggingBuilder) => {
+                    ILoggingBuilder.AddFilter("System", LogLevel.Warning);
+                    ILoggingBuilder.AddFilter("Microsoft", LogLevel.Warning);
+                    ILoggingBuilder.AddLog4Net("log4net.xml");
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>().UseNLog();
                 });
     }
 }

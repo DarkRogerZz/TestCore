@@ -24,6 +24,11 @@
             获取选项配置
             </summary>
         </member>
+        <member name="M:TestCore.Controllers.TestController.WriteLog">
+            <summary>
+            写日志
+            </summary>
+        </member>
         <member name="T:TestCore.DemoOptions">
             <summary>
             
