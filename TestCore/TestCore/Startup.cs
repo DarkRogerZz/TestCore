@@ -43,6 +43,7 @@ namespace TestCore
                 
             }).AddXmlDataContractSerializerFormatters();
 
+            services.AddScoped();
             services.AddSwaggerGen(u =>
             {
                 u.SwaggerDoc("v1",new OpenApiInfo{Title = "Test API",Version = "v1"});
